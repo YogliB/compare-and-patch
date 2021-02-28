@@ -1,17 +1,21 @@
 {
   "name": "compare-and-patch",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Compares files between directories and patches them to make the identical",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node build"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Yogev Boaron Ben-Har",
+  "license": "MIT",
   "devDependencies": {
     "@tsconfig/node14": "^1.0.0",
     "esbuild": "^0.8.53",
     "prettier": "^2.2.1"
-  }
+  },
+  "bin": "bin.js",
+  "files": [
+    "bin.js"
+  ]
 }
