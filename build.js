@@ -3,7 +3,7 @@ const { build } = require("esbuild");
 build({
   bundle: true,
   entryPoints: ["./src/bin.ts"],
-  external: ["autoprefixer", "esbuild-svelte", "esbuild", "svelte-preprocess"],
+  external: [],
   format: "cjs",
   minify: true,
   outfile: "./bin.js",
