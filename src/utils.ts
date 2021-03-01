@@ -1,8 +1,8 @@
 import mri from "mri";
 import { Arguments } from "./models";
 import { readFileSync } from "fs";
-import { join } from "path";
 import { bold, underline, cyan } from "chalk";
+import { join, parse } from "path";
 
 export const getArguments = (): Arguments => {
   const argv = process.argv.slice(2);
@@ -24,4 +24,19 @@ export const logHelp = () => {
     .replace(/`([^`]+)`/g, (m, _) => cyan(_));
 
   process.stdout.write(help);
+};
+
+export const getParsedPath = (src: string) => {
+  return join(__dirname, src, "**/*.*").replace(/\\/g, "/");
+};
+
+export const getTargetFile = (origin: string, target: string, file: string) => {
+  console.log(file, parse(file));
+  const originPath = parse(origin);
+  console.log("originPath", originPath);
+  const targetPath = parse(target);
+  const path = parse(file);
+  path.dir = path.dir.replace(originPath.dir, targetPath.dir);
+  console.log(path);
+  return "";
 };

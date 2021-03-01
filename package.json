@@ -11,12 +11,15 @@
   "license": "MIT",
   "devDependencies": {
     "@tsconfig/node14": "^1.0.0",
+    "@types/diff": "^5.0.0",
     "@types/mri": "^1.1.0",
     "@types/node": "^14.14.31",
     "chalk": "^4.1.0",
+    "diff": "^5.0.0",
     "esbuild": "^0.8.53",
     "mri": "^1.1.6",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "tiny-glob": "^0.2.8"
   },
   "bin": "bin.js",
   "files": [

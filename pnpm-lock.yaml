@@ -1,17 +1,24 @@
 devDependencies:
   '@tsconfig/node14': 1.0.0
+  '@types/diff': 5.0.0
   '@types/mri': 1.1.0
   '@types/node': 14.14.31
   chalk: 4.1.0
+  diff: 5.0.0
   esbuild: 0.8.53
   mri: 1.1.6
   prettier: 2.2.1
+  tiny-glob: 0.2.8
 lockfileVersion: 5.2
 packages:
   /@tsconfig/node14/1.0.0:
     dev: true
     resolution:
       integrity: sha512-RKkL8eTdPv6t5EHgFKIVQgsDapugbuOptNd9OOunN/HAkzmmTnZELx1kNCK0rSdUYGmiFMM3rRQMAWiyp023LQ==
+  /@types/diff/5.0.0:
+    dev: true
+    resolution:
+      integrity: sha512-jrm2K65CokCCX4NmowtA+MfXyuprZC13jbRuwprs6/04z/EcFg/MCwYdsHn+zgV4CQBiATiI7AEq7y1sZCtWKA==
   /@types/mri/1.1.0:
     dev: true
     resolution:
@@ -49,12 +56,26 @@ packages:
     dev: true
     resolution:
       integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
+  /diff/5.0.0:
+    dev: true
+    engines:
+      node: '>=0.3.1'
+    resolution:
+      integrity: sha512-/VTCrvm5Z0JGty/BWHljh+BAiw3IK+2j87NGMu8Nwc/f48WoDAC395uomO9ZD117ZOBaHmkX1oyLvkVM/aIT3w==
   /esbuild/0.8.53:
     dev: true
     hasBin: true
     requiresBuild: true
     resolution:
       integrity: sha512-GIaYGdMukH58hu+lf07XWAeESBYFAsz8fXnrylHDCbBXKOSNtFmoYA8PhSeSF+3/qzeJ0VjzV9AkLURo5yfu3g==
+  /globalyzer/0.1.0:
+    dev: true
+    resolution:
+      integrity: sha512-40oNTM9UfG6aBmuKxk/giHn5nQ8RVz/SS4Ir6zgzOv9/qC3kKZ9v4etGTcJbEl/NyVQH7FGU7d+X1egr57Md2Q==
+  /globrex/0.1.2:
+    dev: true
+    resolution:
+      integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==
   /has-flag/4.0.0:
     dev: true
     engines:
@@ -82,11 +103,21 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==
+  /tiny-glob/0.2.8:
+    dependencies:
+      globalyzer: 0.1.0
+      globrex: 0.1.2
+    dev: true
+    resolution:
+      integrity: sha512-vkQP7qOslq63XRX9kMswlby99kyO5OvKptw7AMwBVMjXEI7Tb61eoI5DydyEMOseyGS5anDN1VPoVxEvH01q8w==
 specifiers:
   '@tsconfig/node14': ^1.0.0
+  '@types/diff': ^5.0.0
   '@types/mri': ^1.1.0
   '@types/node': ^14.14.31
   chalk: ^4.1.0
+  diff: ^5.0.0
   esbuild: ^0.8.53
   mri: ^1.1.6
   prettier: ^2.2.1
+  tiny-glob: ^0.2.8
