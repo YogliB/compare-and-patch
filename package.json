@@ -22,7 +22,10 @@
     "prettier": "^2.2.1",
     "tiny-glob": "^0.2.8"
   },
-  "bin": "bin.js",
+  "bin": {
+    "compare-and-patch": "bin.js",
+    "cap": "bin.js"
+  },
   "files": [
     "bin.js"
   ]
