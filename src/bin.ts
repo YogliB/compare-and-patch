@@ -8,28 +8,49 @@ import {
   logHelp,
 } from "./utils";
 import glob from "tiny-glob";
-import { access, copyFile, readFile, writeFile, unlink } from "fs/promises";
+import {
+  access,
+  copyFile,
+  readFile,
+  writeFile,
+  unlink,
+  mkdir,
+  lstat,
+} from "fs/promises";
 import { existsSync } from "fs";
-import { join } from "path";
+import { join, parse } from "path";
 import PQueue from "p-queue";
 import { cpus } from "os";
+import { isBinaryFile } from "isbinaryfile";
 
 const copyAndPatch = async (originFile: string, targetFile: string) => {
   try {
     const exists = existsSync(targetFile);
-
+    console.log("targetFile", targetFile);
     if (!exists) {
+      await mkdir(parse(targetFile).dir, { recursive: true });
       await copyFile(originFile, targetFile);
       console.log(green(`copied ${targetFile}`));
     }
 
     if (exists) {
-      const f1 = await readFile(originFile, { encoding: "utf8" });
-      const f2 = await readFile(targetFile, { encoding: "utf8" });
+      const isBinary = await isBinaryFile(originFile);
+      if (!isBinary) {
+        const f1 = await readFile(originFile, { encoding: "utf8" });
+        const f2 = await readFile(targetFile, { encoding: "utf8" });
 
-      if (f1.trim().length !== f2.trim().length || f1.trim() !== f2.trim()) {
-        await writeFile(targetFile, f1, "utf8");
-        console.log(green(`patched ${targetFile}`));
+        if (f1.trim().length !== f2.trim().length || f1.trim() !== f2.trim()) {
+          await writeFile(targetFile, f1, "utf8");
+          console.log(green(`patched ${targetFile}`));
+        }
+      } else {
+        const f1 = await readFile(originFile);
+        const f2 = await readFile(targetFile);
+
+        if (f1.length !== f2.length || !f1.equals(f2)) {
+          await writeFile(targetFile, f1);
+          console.log(green(`patched ${targetFile}`));
+        }
       }
     }
   } catch (error) {
@@ -73,6 +94,8 @@ const main = async () => {
     const parallelWorkQueue = new PQueue({ concurrency: CONCURRENT_WORKERS });
 
     for (const file of originFiles) {
+      if ((await lstat(file)).isDirectory()) continue;
+      console.log("originFiles", file);
       const filePath = join(__dirname, file);
       const targetFilePath = getTargetFile(originPath, targetPath, filePath);
 
@@ -85,6 +108,8 @@ const main = async () => {
     }
 
     for (const file of targetFiles) {
+      if ((await lstat(file)).isDirectory()) continue;
+      console.log("targetFiles", file);
       const targetFilePath = join(__dirname, file);
       const originFilePath = getOriginFile(
         originPath,

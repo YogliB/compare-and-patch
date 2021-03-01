@@ -6,6 +6,7 @@ devDependencies:
   chalk: 4.1.0
   diff: 5.0.0
   esbuild: 0.8.53
+  isbinaryfile: 4.0.6
   mri: 1.1.6
   p-queue: 6.6.2
   prettier: 2.2.1
@@ -87,6 +88,12 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==
+  /isbinaryfile/4.0.6:
+    dev: true
+    engines:
+      node: '>= 8.0.0'
+    resolution:
+      integrity: sha512-ORrEy+SNVqUhrCaal4hA4fBzhggQQ+BaLntyPOdoEiwlKZW9BZiJXjg3RMiruE4tPEI3pyVPpySHQF/dKWperg==
   /mri/1.1.6:
     dev: true
     engines:
@@ -146,6 +153,7 @@ specifiers:
   chalk: ^4.1.0
   diff: ^5.0.0
   esbuild: ^0.8.53
+  isbinaryfile: ^4.0.6
   mri: ^1.1.6
   p-queue: ^6.6.2
   prettier: ^2.2.1
