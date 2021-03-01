@@ -25,9 +25,12 @@ const main = async () => {
     const targetFiles = await glob(getParsedPath(targetPath));
 
     for (const file of originFiles) {
-      console.log(
-        green(getTargetFile(originPath, targetPath, join(__dirname, file)))
+      const targetFile = getTargetFile(
+        originPath,
+        targetPath,
+        join(__dirname, file)
       );
+      console.log(file, existsSync(targetFile));
     }
   } catch (error: any) {
     console.error(red(error));

@@ -39,6 +39,8 @@ export const getTargetFile = (
   const parsedTarget = parse(targetPath);
   const parsedFile = parse(filePath);
 
-  console.log(parsedOrigin, parsedTarget, parsedFile);
-  return "";
+  return `${parsedFile.dir.replace(
+    `${parsedOrigin.dir}\\${parsedOrigin.base}`,
+    `${parsedTarget.dir}\\${parsedTarget.base}`
+  )}\\${parsedFile.base}`;
 };
