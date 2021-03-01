@@ -5,6 +5,7 @@ import glob from "tiny-glob";
 import { access } from "fs/promises";
 import { existsSync } from "fs";
 import { createPatch } from "diff";
+import { join, parse } from "path";
 
 const main = async () => {
   const { origin, target, help }: Arguments = getArguments();
@@ -15,14 +16,18 @@ const main = async () => {
   }
 
   try {
-    await access(origin);
-    await access(target);
-    let originFiles = await glob(getParsedPath(origin));
-    let targetFiles = await glob(getParsedPath(target));
+    const originPath = join(__dirname, origin);
+    const targetPath = join(__dirname, target);
+
+    await access(originPath);
+    await access(targetPath);
+    const originFiles = await glob(getParsedPath(originPath));
+    const targetFiles = await glob(getParsedPath(targetPath));
 
     for (const file of originFiles) {
-      if (targetFiles.includes(getTargetFile(origin, target, file))) {
-      }
+      console.log(
+        green(getTargetFile(originPath, targetPath, join(__dirname, file)))
+      );
     }
   } catch (error: any) {
     console.error(red(error));

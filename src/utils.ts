@@ -27,16 +27,18 @@ export const logHelp = () => {
 };
 
 export const getParsedPath = (src: string) => {
-  return join(__dirname, src, "**/*.*").replace(/\\/g, "/");
+  return join(src, "**/*.*").replace(/\\/g, "/");
 };
 
-export const getTargetFile = (origin: string, target: string, file: string) => {
-  console.log(file, parse(file));
-  const originPath = parse(origin);
-  console.log("originPath", originPath);
-  const targetPath = parse(target);
-  const path = parse(file);
-  path.dir = path.dir.replace(originPath.dir, targetPath.dir);
-  console.log(path);
+export const getTargetFile = (
+  originPath: string,
+  targetPath: string,
+  filePath: string
+) => {
+  const parsedOrigin = parse(originPath);
+  const parsedTarget = parse(targetPath);
+  const parsedFile = parse(filePath);
+
+  console.log(parsedOrigin, parsedTarget, parsedFile);
   return "";
 };
