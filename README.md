@@ -34,4 +34,4 @@ Run:
 cap
 ```
 
-or go [here](/blob/master/packages/compare-and-patch/help.md).
+or go [here](help.md).
