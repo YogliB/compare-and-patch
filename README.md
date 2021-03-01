@@ -35,3 +35,7 @@ cap
 ```
 
 or go [here](help.md).
+
+### TODO
+
+1. Add tests
