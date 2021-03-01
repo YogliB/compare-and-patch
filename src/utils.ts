@@ -30,6 +30,21 @@ export const getParsedPath = (src: string) => {
   return join(src, "**/*.*").replace(/\\/g, "/");
 };
 
+export const getOriginFile = (
+  originPath: string,
+  targetPath: string,
+  filePath: string
+) => {
+  const parsedOrigin = parse(originPath);
+  const parsedTarget = parse(targetPath);
+  const parsedFile = parse(filePath);
+
+  return `${parsedFile.dir.replace(
+    `${parsedTarget.dir}\\${parsedTarget.base}`,
+    `${parsedOrigin.dir}\\${parsedOrigin.base}`
+  )}\\${parsedFile.base}`;
+};
+
 export const getTargetFile = (
   originPath: string,
   targetPath: string,

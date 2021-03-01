@@ -7,6 +7,7 @@ devDependencies:
   diff: 5.0.0
   esbuild: 0.8.53
   mri: 1.1.6
+  p-queue: 6.6.2
   prettier: 2.2.1
   tiny-glob: 0.2.8
 lockfileVersion: 5.2
@@ -68,6 +69,10 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha512-GIaYGdMukH58hu+lf07XWAeESBYFAsz8fXnrylHDCbBXKOSNtFmoYA8PhSeSF+3/qzeJ0VjzV9AkLURo5yfu3g==
+  /eventemitter3/4.0.7:
+    dev: true
+    resolution:
+      integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==
   /globalyzer/0.1.0:
     dev: true
     resolution:
@@ -88,6 +93,29 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-oi1b3MfbyGa7FJMP9GmLTttni5JoICpYBRlq+x5V16fZbLsnL9N3wFqqIm/nIG43FjUFkFh9Epzp/kzUGUnJxQ==
+  /p-finally/1.0.0:
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-P7z7FbiZpEEjs0ttzBi3JDNqLK4=
+  /p-queue/6.6.2:
+    dependencies:
+      eventemitter3: 4.0.7
+      p-timeout: 3.2.0
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-RwFpb72c/BhQLEXIZ5K2e+AhgNVmIejGlTgiB9MzZ0e93GRvqZ7uSi0dvRF7/XIXDeNkra2fNHBxTyPDGySpjQ==
+  /p-timeout/3.2.0:
+    dependencies:
+      p-finally: 1.0.0
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-rhIwUycgwwKcP9yTOOFK/AKsAopjjCakVqLHePO3CC6Mir1Z99xT+R63jZxAT5lFZLa2inS5h+ZS2GvR99/FBg==
   /prettier/2.2.1:
     dev: true
     engines:
@@ -119,5 +147,6 @@ specifiers:
   diff: ^5.0.0
   esbuild: ^0.8.53
   mri: ^1.1.6
+  p-queue: ^6.6.2
   prettier: ^2.2.1
   tiny-glob: ^0.2.8
