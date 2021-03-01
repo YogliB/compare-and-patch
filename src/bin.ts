@@ -2,7 +2,7 @@ import { red, green } from "chalk";
 import { Arguments } from "./models";
 import { getArguments, getParsedPath, getTargetFile, logHelp } from "./utils";
 import glob from "tiny-glob";
-import { access } from "fs/promises";
+import { access, copyFile } from "fs/promises";
 import { existsSync } from "fs";
 import { createPatch } from "diff";
 import { join, parse } from "path";
@@ -25,12 +25,12 @@ const main = async () => {
     const targetFiles = await glob(getParsedPath(targetPath));
 
     for (const file of originFiles) {
-      const targetFile = getTargetFile(
-        originPath,
-        targetPath,
-        join(__dirname, file)
-      );
-      console.log(file, existsSync(targetFile));
+      const filePath = join(__dirname, file);
+
+      const targetFilePath = getTargetFile(originPath, targetPath, filePath);
+      const exists = existsSync(targetFilePath);
+
+      if (!exists) await copyFile(filePath, targetFilePath);
     }
   } catch (error: any) {
     console.error(red(error));
