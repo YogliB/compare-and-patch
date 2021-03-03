@@ -1,15 +1,10 @@
 {
-  "name": "compare-and-patch",
-  "version": "0.0.1",
-  "description": "Compares two directories and makes them identical",
-  "main": "index.js",
-  "scripts": {
-    "build": "node build",
-    "prepublish": "pnpm build"
-  },
-  "keywords": [],
   "author": "Yogev Boaron Ben-Har",
-  "license": "MIT",
+  "bin": {
+    "cap": "bin.js",
+    "compare-and-patch": "bin.js"
+  },
+  "description": "Compares two directories and makes them identical",
   "devDependencies": {
     "@tsconfig/node14": "^1.0.0",
     "@types/diff": "^5.0.0",
@@ -24,12 +19,21 @@
     "prettier": "^2.2.1",
     "tiny-glob": "^0.2.8"
   },
-  "bin": {
-    "compare-and-patch": "bin.js",
-    "cap": "bin.js"
-  },
   "files": [
     "bin.js",
     "help.md"
-  ]
+  ],
+  "keywords": [
+    "cli",
+    "diff",
+    "patch"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "compare-and-patch",
+  "scripts": {
+    "build": "node build",
+    "prepublish": "pnpm build"
+  },
+  "version": "0.0.1"
 }
