@@ -26,7 +26,7 @@ import { isBinaryFile } from "isbinaryfile";
 const copyAndPatch = async (originFile: string, targetFile: string) => {
   try {
     const exists = existsSync(targetFile);
-    console.log("targetFile", targetFile);
+
     if (!exists) {
       await mkdir(parse(targetFile).dir, { recursive: true });
       await copyFile(originFile, targetFile);
@@ -86,7 +86,13 @@ const main = async () => {
     const targetPath = join(__dirname, target);
 
     await access(originPath);
-    await access(targetPath);
+    try {
+      await access(targetPath);
+    } catch (error) {
+      if (error.code === "ENOENT") {
+        await mkdir(targetPath);
+      }
+    }
     const originFiles = await glob(getParsedPath(originPath));
     const targetFiles = await glob(getParsedPath(targetPath));
     let numOfFiles = originFiles.length + targetFiles.length;
@@ -95,7 +101,14 @@ const main = async () => {
 
     for (const file of originFiles) {
       if ((await lstat(file)).isDirectory()) continue;
-      console.log("originFiles", file);
+
+      try {
+        await access(file);
+      } catch (error) {
+        console.error(red(error));
+        continue;
+      }
+
       const filePath = join(__dirname, file);
       const targetFilePath = getTargetFile(originPath, targetPath, filePath);
 
@@ -109,7 +122,7 @@ const main = async () => {
 
     for (const file of targetFiles) {
       if ((await lstat(file)).isDirectory()) continue;
-      console.log("targetFiles", file);
+
       const targetFilePath = join(__dirname, file);
       const originFilePath = getOriginFile(
         originPath,

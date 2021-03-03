@@ -27,7 +27,7 @@ export const logHelp = () => {
 };
 
 export const getParsedPath = (src: string) => {
-  return join(src, "**/*.*").replace(/\\/g, "/");
+  return join(src, "**/**").replace(/\\/g, "/");
 };
 
 export const getOriginFile = (
