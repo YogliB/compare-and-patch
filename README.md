@@ -23,7 +23,7 @@ compare-and-patch --origin ./origin --target ./path/to/target
 Shorthand:
 
 ```bash
-cap --o ./origin --t ./path/to/target
+cap -o ./origin -t ./path/to/target
 ```
 
 ### See all options
