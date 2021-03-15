@@ -1,8 +1,7 @@
 {
   "author": "Yogev Boaron Ben-Har",
   "bin": {
-    "cap": "bin.js",
-    "compare-and-patch": "bin.js"
+    "cap": "bin.js"
   },
   "description": "Compares two directories and makes them identical",
   "devDependencies": {
