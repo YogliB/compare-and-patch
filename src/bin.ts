@@ -23,6 +23,8 @@ import PQueue from "p-queue";
 import { cpus } from "os";
 import { isBinaryFile } from "isbinaryfile";
 
+const cwd = process.cwd();
+
 const copyAndPatch = async (originFile: string, targetFile: string) => {
   try {
     const exists = existsSync(targetFile);
@@ -82,8 +84,8 @@ const main = async () => {
   const CONCURRENT_WORKERS = cpus().length;
 
   try {
-    const originPath = join(__dirname, origin);
-    const targetPath = join(__dirname, target);
+    const originPath = join(cwd, origin);
+    const targetPath = join(cwd, target);
 
     await access(originPath);
     try {
@@ -109,7 +111,7 @@ const main = async () => {
         continue;
       }
 
-      const filePath = join(__dirname, file);
+      const filePath = join(cwd, file);
       const targetFilePath = getTargetFile(originPath, targetPath, filePath);
 
       parallelWorkQueue
