@@ -27,14 +27,18 @@ import { performance } from "perf_hooks";
 
 const cwd = process.cwd();
 
-const copyAndPatch = async (originFile: string, targetFile: string) => {
+const copyAndPatch = async (
+  originFile: string,
+  targetFile: string,
+  verbose: boolean
+) => {
   try {
     const exists = existsSync(targetFile);
 
     if (!exists) {
       await mkdir(parse(targetFile).dir, { recursive: true });
       await copyFile(originFile, targetFile);
-      console.log(green(`copied ${targetFile}`));
+      if (verbose) console.log(green(`copied ${targetFile}`));
     }
 
     if (exists) {
@@ -45,7 +49,7 @@ const copyAndPatch = async (originFile: string, targetFile: string) => {
 
         if (f1.trim().length !== f2.trim().length || f1.trim() !== f2.trim()) {
           await writeFile(targetFile, f1, "utf8");
-          console.log(green(`patched ${targetFile}`));
+          if (verbose) console.log(green(`patched ${targetFile}`));
         }
       } else {
         const f1 = await readFile(originFile);
@@ -53,7 +57,7 @@ const copyAndPatch = async (originFile: string, targetFile: string) => {
 
         if (f1.length !== f2.length || !f1.equals(f2)) {
           await writeFile(targetFile, f1);
-          console.log(green(`patched ${targetFile}`));
+          if (verbose) console.log(green(`patched ${targetFile}`));
         }
       }
     }
@@ -62,13 +66,17 @@ const copyAndPatch = async (originFile: string, targetFile: string) => {
   }
 };
 
-const removeExtraFiles = async (originFile: string, targetFile: string) => {
+const removeExtraFiles = async (
+  originFile: string,
+  targetFile: string,
+  verbose: boolean
+) => {
   try {
     const exists = existsSync(originFile);
 
     if (!exists) {
       await unlink(targetFile);
-      console.log(green(`removed ${targetFile}`));
+      if (verbose) console.log(green(`removed ${targetFile}`));
     }
   } catch (error) {
     console.error(red(error));
@@ -76,11 +84,15 @@ const removeExtraFiles = async (originFile: string, targetFile: string) => {
 };
 
 const main = async () => {
-  const { origin, target, help }: Arguments = getArguments();
+  const { origin, target, help, verbose, silent }: Arguments = getArguments();
 
   if (help || !(origin?.trim() && target?.trim())) {
     logHelp();
     process.exit(0);
+  }
+
+  if (silent) {
+    console.log = console.error = () => {};
   }
 
   const CONCURRENT_WORKERS = cpus().length;
@@ -134,7 +146,7 @@ const main = async () => {
       const targetFilePath = getTargetFile(originPath, targetPath, filePath);
 
       parallelWorkQueue
-        .add(() => copyAndPatch(filePath, targetFilePath))
+        .add(() => copyAndPatch(filePath, targetFilePath, verbose))
         .then(() => {
           numOfFiles -= 1;
           if (numOfFiles === 0) process.exit(0);
@@ -152,7 +164,7 @@ const main = async () => {
       );
 
       parallelWorkQueue
-        .add(() => removeExtraFiles(originFilePath, targetFilePath))
+        .add(() => removeExtraFiles(originFilePath, targetFilePath, verbose))
         .then(() => {
           numOfFiles -= 1;
           if (numOfFiles === 0) process.exit(0);

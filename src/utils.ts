@@ -6,7 +6,7 @@ import { join, parse } from "path";
 
 export const getArguments = (): Arguments => {
   const argv = process.argv.slice(2);
-  const { origin, target, help } = mri(argv, {
+  const { help, origin, silent, target, verbose } = mri(argv, {
     alias: {
       h: "help",
       o: "origin",
@@ -16,7 +16,7 @@ export const getArguments = (): Arguments => {
     },
   });
 
-  return { origin, target, help };
+  return { help, origin, silent, target, verbose };
 };
 
 export const logHelp = () => {
