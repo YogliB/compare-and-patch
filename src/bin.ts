@@ -6,6 +6,7 @@ import {
   getParsedPath,
   getTargetFile,
   logHelp,
+  presentLoader,
 } from "./utils";
 import glob from "tiny-glob";
 import {
@@ -98,12 +99,16 @@ const main = async () => {
     }
 
     let t0 = performance.now();
+    let timeout = presentLoader("Mapping origin directory...");
     const originFiles = await glob(getParsedPath(originPath));
+    clearInterval(timeout);
     let t1 = performance.now();
     console.log(`Mapping origin directory took ${t1 - t0} milliseconds.`);
 
     t0 = performance.now();
+    timeout = presentLoader("Mapping target directory...");
     const targetFiles = await glob(getParsedPath(targetPath));
+    clearInterval(timeout);
     t1 = performance.now();
     console.log(`Mapping target directory took ${t1 - t0} milliseconds.`);
 
