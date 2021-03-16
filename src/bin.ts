@@ -22,6 +22,7 @@ import { join, parse } from "path";
 import PQueue from "p-queue";
 import { cpus } from "os";
 import { isBinaryFile } from "isbinaryfile";
+import { performance } from "perf_hooks";
 
 const cwd = process.cwd();
 
@@ -95,8 +96,17 @@ const main = async () => {
         await mkdir(targetPath);
       }
     }
+
+    let t0 = performance.now();
     const originFiles = await glob(getParsedPath(originPath));
+    let t1 = performance.now();
+    console.log(`Mapping origin directory took ${t1 - t0} milliseconds.`);
+
+    t0 = performance.now();
     const targetFiles = await glob(getParsedPath(targetPath));
+    t1 = performance.now();
+    console.log(`Mapping target directory took ${t1 - t0} milliseconds.`);
+
     let numOfFiles = originFiles.length + targetFiles.length;
 
     const parallelWorkQueue = new PQueue({ concurrency: CONCURRENT_WORKERS });

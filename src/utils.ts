@@ -59,3 +59,13 @@ export const getTargetFile = (
     `${parsedTarget.dir}\\${parsedTarget.base}`
   )}\\${parsedFile.base}`;
 };
+
+export const presentLoader = (message?: string) => {
+  var P = ["\\", "|", "/", "-"];
+  var x = 0;
+
+  return setInterval(() => {
+    process.stdout.write(`\r ${P[x++]} ${message}`);
+    x &= 3;
+  }, 250);
+};
