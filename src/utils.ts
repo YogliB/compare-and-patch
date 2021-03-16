@@ -8,9 +8,11 @@ export const getArguments = (): Arguments => {
   const argv = process.argv.slice(2);
   const { origin, target, help } = mri(argv, {
     alias: {
-      o: "origin",
-      t: "target",
       h: "help",
+      o: "origin",
+      s: "silent",
+      t: "target",
+      v: "verbose",
     },
   });
 
