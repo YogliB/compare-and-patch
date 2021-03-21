@@ -146,7 +146,7 @@ const main = async () => {
       const targetFilePath = getTargetFile(originPath, targetPath, filePath);
 
       parallelWorkQueue
-        .add(() => copyAndPatch(filePath, targetFilePath, verbose))
+        .add(() => copyAndPatch(filePath, targetFilePath, !!verbose))
         .then(() => {
           numOfFiles -= 1;
           if (numOfFiles === 0) process.exit(0);
@@ -164,7 +164,7 @@ const main = async () => {
       );
 
       parallelWorkQueue
-        .add(() => removeExtraFiles(originFilePath, targetFilePath, verbose))
+        .add(() => removeExtraFiles(originFilePath, targetFilePath, !!verbose))
         .then(() => {
           numOfFiles -= 1;
           if (numOfFiles === 0) process.exit(0);
