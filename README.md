@@ -38,6 +38,7 @@ or go [here](help.md).
 
 ### TODO
 
+1. JavaScript API.
 1. Add tests
 1. Watch mode.
 1. Keep extra files.
