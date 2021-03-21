@@ -40,4 +40,5 @@ or go [here](help.md).
 
 1. Add tests
 1. Watch mode.
-1. Keep extra files
+1. Keep extra files.
+1. Add stats.
