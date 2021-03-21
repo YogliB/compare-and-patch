@@ -8,6 +8,10 @@ Usage:
 
 ## options:
 
+`--help (-h)`
+
+Outputs all possible flags.
+
 `--origin (-o)`
 
 **Required**
@@ -21,3 +25,11 @@ For example: `./origin`
 Path to the target folder.
 
 For example: `./path/to/target`
+
+`--silent (-s)`
+
+Silence all logs and errors.
+
+`--verbose (-v)`
+
+Outputs all possible info.
