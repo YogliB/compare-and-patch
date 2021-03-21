@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.0] - 2020-03-21
 
+### Added
+
+- Added silent mode.
+- Added verbose mode.
+
 ### Fixes
 
 - Fixed incorrect path handling.
