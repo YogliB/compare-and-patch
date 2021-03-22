@@ -3,6 +3,7 @@ export interface Options {
   target: string;
   silent?: boolean;
   verbose?: boolean;
+  watch?: boolean;
 }
 
 export interface Arguments {
@@ -11,4 +12,5 @@ export interface Arguments {
   target?: string;
   silent?: boolean;
   verbose?: boolean;
+  watch?: boolean;
 }
