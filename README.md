@@ -36,6 +36,27 @@ cap
 
 or go [here](help.md).
 
+### JavaScript API
+
+Install:
+
+```bash
+npm install compare-and-patch
+```
+
+Import
+
+```javascript
+import { compareAndPatch } from "compare-and-patch";
+
+compareAndPatch({
+  origin: "./origin",
+  target: "./path/to/target",
+});
+```
+
+All options can be seen [here](https://github.com/YogliB/compare-and-patch/blob/main/src/models.ts#L1).
+
 ### TODO
 
 1. Add tests
