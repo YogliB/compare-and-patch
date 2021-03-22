@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Added watch mode to the CLI.
+
+## [0.2.0] - 2020-03-22
+
+### Added
+
 - Added a JavaScript API.
 
 ## [0.1.0] - 2020-03-21
