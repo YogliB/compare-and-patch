@@ -16,11 +16,11 @@ export const getArguments = (): Arguments => {
     },
   });
 
-  return { help, origin, silent, target, verbose };
+  return { help, origin, target, silent, verbose };
 };
 
 export const logHelp = () => {
-  const help = readFileSync(join(__dirname, "help.md"), "utf-8")
+  const help = readFileSync(join("../help.md"), "utf-8")
     .replace(/^(\s*)#+ (.+)/gm, (m, s, _) => s + bold(_))
     .replace(/_([^_]+)_/g, (m, _) => underline(_))
     .replace(/`([^`]+)`/g, (m, _) => cyan(_));

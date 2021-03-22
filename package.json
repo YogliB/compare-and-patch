@@ -1,7 +1,7 @@
 {
   "author": "Yogev Boaron Ben-Har",
   "bin": {
-    "cap": "bin.js"
+    "cap": "./dist/bin.js"
   },
   "description": "Compares two directories and makes them identical",
   "devDependencies": {
@@ -16,10 +16,11 @@
     "mri": "^1.1.6",
     "p-queue": "^6.6.2",
     "prettier": "^2.2.1",
-    "tiny-glob": "^0.2.8"
+    "tiny-glob": "^0.2.8",
+    "typescript": "^4.2.3"
   },
   "files": [
-    "bin.js",
+    "dist",
     "help.md"
   ],
   "homepage": "https://github.com/YogliB/compare-and-patch#readme.md",
@@ -29,7 +30,7 @@
     "patch"
   ],
   "license": "MIT",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "name": "compare-and-patch",
   "readme": "https://github.com/YogliB/compare-and-patch#readme.md",
   "repository": {
@@ -37,7 +38,7 @@
     "url": "https://github.com/YogliB/compare-and-patch.git"
   },
   "scripts": {
-    "build": "node build",
+    "build": "node build && tsc --emitDeclarationOnly --outDir dist",
     "prepublish": "pnpm build"
   },
   "version": "0.1.0"

@@ -2,8 +2,9 @@
   "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "declaration": true,
     "isolatedModules": true,
-    "noEmit": true,
     "resolveJsonModule": true
-  }
+  },
+  "include": ["src"]
 }
