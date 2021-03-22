@@ -153,7 +153,7 @@ export const compareAndPatch = async (options: Options) => {
     for (const file of targetFiles) {
       if ((await lstat(file)).isDirectory()) continue;
 
-      const targetFilePath = join(__dirname, file);
+      const targetFilePath = join(cwd, file);
       const originFilePath = getOriginFile(
         originPath,
         targetPath,
