@@ -38,13 +38,13 @@ or go [here](help.md).
 
 ### JavaScript API
 
-Install:
+install:
 
 ```bash
 npm install compare-and-patch
 ```
 
-Import
+import & use:
 
 ```javascript
 import { compareAndPatch } from "compare-and-patch";
@@ -59,6 +59,6 @@ All options can be seen [here](https://github.com/YogliB/compare-and-patch/blob/
 
 ### TODO
 
-1. Add tests
+1. Add tests.
 1. Keep extra files.
 1. Add stats.
