@@ -32,7 +32,7 @@ const main = async () => {
 
   if (watch) {
     console.log("Watching for changes...");
-    watchFiles(originPath).on("all", () => {
+    watchFiles(originPath).on("change", () => {
       compareAndPatch({ origin, target, verbose, silent });
     });
   } else compareAndPatch({ origin, target, verbose, silent });
