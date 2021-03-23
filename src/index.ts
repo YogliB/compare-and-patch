@@ -84,7 +84,7 @@ const removeExtraFiles = async (
 };
 
 export const compareAndPatch = async (options: Options) => {
-  const { origin, target, verbose, silent } = options;
+  const { origin, target, keep, verbose, silent } = options;
 
   if (!origin?.trim()) throw "Missing origin directory path";
 
@@ -150,22 +150,26 @@ export const compareAndPatch = async (options: Options) => {
         });
     }
 
-    for (const file of targetFiles) {
-      if ((await lstat(file)).isDirectory()) continue;
+    if (!keep) {
+      for (const file of targetFiles) {
+        if ((await lstat(file)).isDirectory()) continue;
 
-      const targetFilePath = join(cwd, file);
-      const originFilePath = getOriginFile(
-        originPath,
-        targetPath,
-        targetFilePath
-      );
+        const targetFilePath = join(cwd, file);
+        const originFilePath = getOriginFile(
+          originPath,
+          targetPath,
+          targetFilePath
+        );
 
-      parallelWorkQueue
-        .add(() => removeExtraFiles(originFilePath, targetFilePath, !!verbose))
-        .then(() => {
-          numOfFiles -= 1;
-          if (numOfFiles === 0) return;
-        });
+        parallelWorkQueue
+          .add(() =>
+            removeExtraFiles(originFilePath, targetFilePath, !!verbose)
+          )
+          .then(() => {
+            numOfFiles -= 1;
+            if (numOfFiles === 0) return;
+          });
+      }
     }
   } catch (error: any) {
     console.error(red(error));

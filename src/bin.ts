@@ -12,6 +12,7 @@ const main = async () => {
     help,
     origin,
     target,
+    keep,
     silent,
     verbose,
     watch,
@@ -33,9 +34,9 @@ const main = async () => {
   if (watch) {
     console.log("Watching for changes...");
     watchFiles(originPath).on("change", () => {
-      compareAndPatch({ origin, target, verbose, silent });
+      compareAndPatch({ origin, target, keep, verbose, silent });
     });
-  } else compareAndPatch({ origin, target, verbose, silent });
+  } else compareAndPatch({ origin, target, keep, verbose, silent });
 };
 
 main();
