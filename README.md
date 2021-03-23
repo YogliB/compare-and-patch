@@ -3,7 +3,7 @@
 ## compares two folders and makes them identical
 
 [![npm package version](https://badgen.net/npm/v/compare-and-patch)](https://npm.im/compare-and-patch)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](CODE-OF-CONDUCT.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 [![snyk report](https://img.shields.io/snyk/vulnerabilities/npm/compare-and-patch)](https://snyk.io/vuln/npm:compare-and-patch)
 
