@@ -26,6 +26,12 @@ Shorthand:
 cap -o ./origin -t ./path/to/target
 ```
 
+Don't want to install? Just do:
+
+```bash
+npx cap -o ./origin -t ./path/to/target
+```
+
 ### See all options
 
 Run:
