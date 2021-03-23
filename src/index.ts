@@ -1,11 +1,9 @@
 import { red, green } from "chalk";
-import { Arguments, Options } from "./models";
+import { Options } from "./models";
 import {
-  getArguments,
   getOriginFile,
   getParsedPath,
   getTargetFile,
-  logHelp,
   presentLoader,
 } from "./utils";
 import glob from "tiny-glob";
