@@ -26,6 +26,12 @@ Shorthand:
 cap -o ./origin -t ./path/to/target
 ```
 
+Don't want to install? Just do:
+
+```bash
+npx cap -o ./origin -t ./path/to/target
+```
+
 ### See all options
 
 Run:
@@ -61,3 +67,4 @@ All options can be seen [here](https://github.com/YogliB/compare-and-patch/blob/
 
 1. Add tests.
 1. Add stats.
+1. Add ignore patterns.
