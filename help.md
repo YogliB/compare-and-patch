@@ -30,6 +30,10 @@ For example: `./path/to/target`
 
 Keep files in the target directory that don't exist in the origin directory.
 
+`--watch (-w)`
+
+Run the CLI in **watch** mode.
+
 `--silent (-s)`
 
 Silence all logs and errors.
