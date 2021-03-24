@@ -1,18 +1,17 @@
 export interface Options {
+  /** Path to the origin folder */
   origin: string;
+  /** Path to the target folder */
   target: string;
+  /** Keep files in the target directory that don't exist in the origin directory */
   keep?: boolean;
+  /** Silence all logs and errors */
   silent?: boolean;
+  /** Outputs all possible info */
   verbose?: boolean;
-  watch?: boolean;
 }
 
-export interface Arguments {
+export type Arguments = Options & {
   help?: boolean;
-  origin?: string;
-  target?: string;
-  keep?: boolean;
-  silent?: boolean;
-  verbose?: boolean;
   watch?: boolean;
-}
+};
