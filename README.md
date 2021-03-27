@@ -69,3 +69,4 @@ All options can be seen [here](https://github.com/YogliB/compare-and-patch/blob/
 1. Add tests.
 1. Add stats.
 1. Add ignore patterns.
+1. Dry run.
