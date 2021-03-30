@@ -123,51 +123,78 @@ export const compareAndPatch = async (options: Options) => {
       `\nMapping target directory took ${Math.round(t1 - t0)} milliseconds.`
     );
 
-    let numOfFiles = originFiles.length + targetFiles.length;
-
+    let numOfOriginFiles = originFiles.length;
     const parallelWorkQueue = new PQueue({ concurrency: CONCURRENT_WORKERS });
 
-    for (const file of originFiles) {
-      if ((await lstat(file)).isDirectory()) continue;
+    t0 = performance.now();
+    timeout = presentLoader("Copying and patching files...");
+    await new Promise<void>(async (resolve, _) => {
+      for (const file of originFiles) {
+        if ((await lstat(file)).isDirectory()) {
+          numOfOriginFiles -= 1;
+          continue;
+        }
 
-      try {
-        await access(file);
-      } catch (error) {
-        console.error(red(error));
-        continue;
-      }
+        try {
+          await access(file);
+        } catch (error) {
+          console.error(red(error));
+          continue;
+        }
 
-      const filePath = join(cwd, file);
-      const targetFilePath = getTargetFile(originPath, targetPath, filePath);
+        const filePath = join(cwd, file);
+        const targetFilePath = getTargetFile(originPath, targetPath, filePath);
 
-      parallelWorkQueue
-        .add(() => copyAndPatch(filePath, targetFilePath, !!verbose))
-        .then(() => {
-          numOfFiles -= 1;
-          if (numOfFiles === 0) return;
+        parallelWorkQueue.add(async () => {
+          await copyAndPatch(filePath, targetFilePath, !!verbose);
+          numOfOriginFiles -= 1;
+          if (numOfOriginFiles === 0) {
+            resolve();
+          }
         });
-    }
+      }
+    });
+    clearInterval(timeout);
+    t1 = performance.now();
+    console.log(
+      `\nCopying and patching took ${Math.round(t1 - t0)} milliseconds.`
+    );
 
     if (!keep) {
-      for (const file of targetFiles) {
-        if ((await lstat(file)).isDirectory()) continue;
+      if (originFiles.toString() === targetFiles.toString()) return;
 
-        const targetFilePath = join(cwd, file);
-        const originFilePath = getOriginFile(
-          originPath,
-          targetPath,
-          targetFilePath
-        );
+      t0 = performance.now();
+      timeout = presentLoader("Removing extra files...");
 
-        parallelWorkQueue
-          .add(() =>
-            removeExtraFiles(originFilePath, targetFilePath, !!verbose)
-          )
-          .then(() => {
-            numOfFiles -= 1;
-            if (numOfFiles === 0) return;
+      let numOfTargetFiles = targetFiles.length;
+
+      await new Promise<void>(async (resolve, _) => {
+        for (const file of targetFiles) {
+          if ((await lstat(file)).isDirectory()) {
+            numOfTargetFiles -= 1;
+            continue;
+          }
+
+          const targetFilePath = join(cwd, file);
+          const originFilePath = getOriginFile(
+            originPath,
+            targetPath,
+            targetFilePath
+          );
+
+          parallelWorkQueue.add(async () => {
+            await removeExtraFiles(originFilePath, targetFilePath, !!verbose);
+            numOfTargetFiles -= 1;
+            if (numOfTargetFiles === 0) resolve();
           });
-      }
+        }
+      });
+
+      clearInterval(timeout);
+      t1 = performance.now();
+      console.log(
+        `\nRemoving extra files took ${Math.round(t1 - t0)} milliseconds.`
+      );
     }
   } catch (error: any) {
     console.error(red(error));
